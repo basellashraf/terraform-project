@@ -8,18 +8,33 @@ It includes:
 - Custom VPC with subnets and route tables
 - Bastion Host for secure SSH access to private instances
 - EC2 Instances (public and private)
-- Load Balancers (Application Load Balancer for public-facing traffic)
+- Load Balancer (Application Load Balancer)
 - Remote backend using **S3** for state and **DynamoDB** for locking
 
 ---
 
 ## 🧱 Project Structure
 
-terraform_project/ ├── vpc/ │ ├── main.tf │ ├── output.tf │ └── variables.tf ├── ec2/ │ ├── main.tf │ ├── output.tf │ └── variables.tf ├── loadbalancer/ │ ├── main.tf │ ├── output.tf │ └── variables.tf ├── main.tf ├── provider.tf ├── variables.tf ├── output.tf ├── .gitignore
-
-yaml
-Copy
-Edit
+```
+terraform_project/
+├── vpc/
+│   ├── main.tf
+│   ├── output.tf
+│   └── variables.tf
+├── ec2/
+│   ├── main.tf
+│   ├── output.tf
+│   └── variables.tf
+├── loadbalancer/
+│   ├── main.tf
+│   ├── output.tf
+│   └── variables.tf
+├── main.tf
+├── provider.tf
+├── variables.tf
+├── output.tf
+├── .gitignore
+```
 
 ---
 
@@ -37,60 +52,75 @@ Initialize the working directory:
 
 ```bash
 terraform init
+```
+
 Review the execution plan:
 
-bash
-Copy
-Edit
+```bash
 terraform plan
+```
+
 Apply the configuration:
 
-bash
-Copy
-Edit
+```bash
 terraform apply
+```
+
 Destroy the infrastructure:
 
-bash
-Copy
-Edit
+```bash
 terraform destroy
-📤 Output
-After terraform apply, the following IPs are written to a file using local-exec:
+```
 
-File: all-ips.txt
+---
 
-cpp
-Copy
-Edit
-public-ip1   x.x.x.x
-public-ip2   y.y.y.y
-☁️ Remote Backend
-State files are stored remotely to allow team collaboration and state locking:
+## 📤 Output
 
-S3 Bucket: terraform-state-bucket-basel-20250407
+After applying, Terraform uses a `local-exec` to write instance public IPs into a file:
 
-DynamoDB Table for Locking: terraform-locks
+**File:** `all-ips.txt`
 
-📁 Git Setup Notes
-This repository includes a .gitignore file that excludes sensitive and unnecessary files:
+```
+public-ip1   1.1.1.1
+public-ip2   2.2.2.2
+```
 
-markdown
-Copy
-Edit
+---
+
+## ☁️ Remote Backend
+
+The project uses remote state management with locking:
+
+- **S3 Bucket:** `terraform-state-bucket-basel-20250407`
+- **DynamoDB Table:** `terraform-locks`
+
+---
+
+## 📁 Git Setup Notes
+
+The `.gitignore` file excludes Terraform-generated files and sensitive data:
+
+```
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup
 terraform.tfstate.d/
 *.zip
 *.pem
-✍️ Author
-Basel Ashraf
-GitHub: https://github.com/basellashraf
+```
 
-✅ Status
-Project is complete and ready for delivery.
-All infrastructure components were tested successfully.
+---
 
-🖼️ Screenshots
-You can add screenshots of the AWS Console or Terraform output here for demonstration
+## ✍️ Author
+
+**Basel Ashraf**  
+GitHub: [https://github.com/basellashraf](https://github.com/basellashraf)
+
+---
+
+
+
+## ✅ Project Status
+
+✔️ Infrastructure tested and provisioned successfully  
+✔️ Ready for deployment or handoff
