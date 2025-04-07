@@ -48,7 +48,7 @@ module "backend_1" {
   instance_name        = "backend-1"
   ssh_user             = "ubuntu"
   private_key_path     = "~/.ssh/my-key.pem"
-  bastion_public_ip    = module.proxy_1.instance_public_ip  # تمرير الـPublic IP للباستيون
+  bastion_public_ip    = module.proxy_1.instance_public_ip  
   depends_on           = [module.vpc]
   dependency_module    = module.vpc
 }
@@ -63,7 +63,7 @@ module "backend_2" {
   instance_name        = "backend-2"
   ssh_user             = "ubuntu"
   private_key_path     = "~/.ssh/my-key.pem"
-  bastion_public_ip    = module.proxy_1.instance_public_ip  # نفس الباستيون هنا
+  bastion_public_ip    = module.proxy_1.instance_public_ip 
   depends_on           = [module.vpc]
   dependency_module    = module.vpc
 }
